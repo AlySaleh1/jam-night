@@ -120,11 +120,7 @@
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4o-mini"
-        },
+        "modelName": "models/gemini-1.5-flash",
         "messages": {
           "values": [
             {
@@ -138,23 +134,19 @@
       },
       "id": "ai-turbohaus",
       "name": "AI Parse Turbohaus",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.8,
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
       "position": [500, 0],
       "credentials": {
-        "openAiApi": {
-          "id": "OPENAI_CREDENTIAL_ID",
-          "name": "OpenAI API"
+        "googlePalmApi": {
+          "id": "GOOGLE_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini API"
         }
       }
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4o-mini"
-        },
+        "modelName": "models/gemini-1.5-flash",
         "messages": {
           "values": [
             {
@@ -168,23 +160,19 @@
       },
       "id": "ai-barleritz",
       "name": "AI Parse Bar Le Ritz",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.8,
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
       "position": [500, 150],
       "credentials": {
-        "openAiApi": {
-          "id": "OPENAI_CREDENTIAL_ID",
-          "name": "OpenAI API"
+        "googlePalmApi": {
+          "id": "GOOGLE_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini API"
         }
       }
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4o-mini"
-        },
+        "modelName": "models/gemini-1.5-flash",
         "messages": {
           "values": [
             {
@@ -198,23 +186,19 @@
       },
       "id": "ai-quaidesbrumes",
       "name": "AI Parse Quai des Brumes",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.8,
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
       "position": [500, 300],
       "credentials": {
-        "openAiApi": {
-          "id": "OPENAI_CREDENTIAL_ID",
-          "name": "OpenAI API"
+        "googlePalmApi": {
+          "id": "GOOGLE_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini API"
         }
       }
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4o-mini"
-        },
+        "modelName": "models/gemini-1.5-flash",
         "messages": {
           "values": [
             {
@@ -228,23 +212,19 @@
       },
       "id": "ai-foufounes",
       "name": "AI Parse Foufounes",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.8,
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
       "position": [500, 450],
       "credentials": {
-        "openAiApi": {
-          "id": "OPENAI_CREDENTIAL_ID",
-          "name": "OpenAI API"
+        "googlePalmApi": {
+          "id": "GOOGLE_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini API"
         }
       }
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4o-mini"
-        },
+        "modelName": "models/gemini-1.5-flash",
         "messages": {
           "values": [
             {
@@ -258,13 +238,13 @@
       },
       "id": "ai-casadelpopolo",
       "name": "AI Parse Casa del Popolo",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.8,
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
       "position": [500, 600],
       "credentials": {
-        "openAiApi": {
-          "id": "OPENAI_CREDENTIAL_ID",
-          "name": "OpenAI API"
+        "googlePalmApi": {
+          "id": "GOOGLE_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini API"
         }
       }
     },
