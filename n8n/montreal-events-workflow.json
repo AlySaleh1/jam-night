@@ -5,448 +5,249 @@
       "parameters": {
         "rule": {
           "interval": [
-            {
-              "field": "cronExpression",
-              "expression": "0 0 * * *"
-            }
+            {}
           ]
         }
       },
-      "id": "cron-trigger",
-      "name": "Daily Midnight Trigger",
+      "id": "ca403b41-71f3-4c1e-b860-64e87443906c",
+      "name": "Daily Midnight Trigger1",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
-      "position": [0, 300]
+      "position": [
+        5744,
+        3504
+      ]
     },
     {
       "parameters": {
-        "method": "GET",
         "url": "https://www.turbohaus.ca/calendrier",
-        "options": {
-          "response": {
-            "response": {
-              "fullResponse": false,
-              "responseFormat": "text"
-            }
-          },
-          "timeout": 30000
-        }
+        "options": {}
       },
-      "id": "http-turbohaus",
-      "name": "Fetch Turbohaus",
+      "id": "e23d0c4c-2b83-40d0-8de3-7e216a23e059",
+      "name": "Fetch Turbohaus1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [250, 0]
+      "position": [
+        6048,
+        3232
+      ]
     },
     {
       "parameters": {
-        "method": "GET",
         "url": "https://www.barleritzpdb.com/",
         "options": {
           "response": {
             "response": {
-              "fullResponse": false,
               "responseFormat": "text"
             }
           },
           "timeout": 30000
         }
       },
-      "id": "http-barleritz",
-      "name": "Fetch Bar Le Ritz",
+      "id": "4e3d45c3-ae8c-45e1-a690-04c1bebce0ce",
+      "name": "Fetch Bar Le Ritz1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [250, 150]
+      "position": [
+        6048,
+        3376
+      ]
     },
     {
       "parameters": {
-        "method": "GET",
         "url": "https://quaidesbrumes.ca/",
         "options": {
           "response": {
             "response": {
-              "fullResponse": false,
               "responseFormat": "text"
             }
           },
           "timeout": 30000
         }
       },
-      "id": "http-quaidesbrumes",
-      "name": "Fetch Quai des Brumes",
+      "id": "0ab2c180-b159-4abd-b0fe-76eeb1865b5f",
+      "name": "Fetch Quai des Brumes1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [250, 300]
+      "position": [
+        6048,
+        3504
+      ]
     },
     {
       "parameters": {
-        "method": "GET",
         "url": "https://foufouneselectriques.com/evenements/",
         "options": {
           "response": {
             "response": {
-              "fullResponse": false,
               "responseFormat": "text"
             }
           },
           "timeout": 30000
         }
       },
-      "id": "http-foufounes",
-      "name": "Fetch Foufounes",
+      "id": "73bdde12-e038-4abe-96f5-c6d68bb3b111",
+      "name": "Fetch Foufounes1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [250, 450]
+      "position": [
+        6048,
+        3648
+      ]
     },
     {
       "parameters": {
-        "method": "GET",
         "url": "https://casadelpopolo.com/en",
         "options": {
           "response": {
             "response": {
-              "fullResponse": false,
               "responseFormat": "text"
             }
           },
           "timeout": 30000
         }
       },
-      "id": "http-casadelpopolo",
-      "name": "Fetch Casa del Popolo",
+      "id": "c69488e4-05bf-46d2-9880-57620dccd1ec",
+      "name": "Fetch Casa del Popolo1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [250, 600]
+      "position": [
+        6048,
+        3792
+      ]
     },
     {
       "parameters": {
-        "modelName": "models/gemini-1.5-flash",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-3-flash-preview",
+          "mode": "list",
+          "cachedResultName": "models/gemini-3-flash-preview"
+        },
         "messages": {
           "values": [
             {
-              "content": "=You are an expert at extracting music event information from HTML. Analyze the following HTML from Turbohaus venue in Montreal and extract ONLY music events (concerts, live music, DJ sets, etc.).\n\nIGNORE: comedy shows, talks, workshops, poetry, theatre, and any non-music events.\n\nFor each music event found, extract:\n- eventName: The name of the event or performing artist(s)\n- eventDate: The date in ISO-8601 format (YYYY-MM-DD). If a date range, use the start date.\n- eventImage: The full URL of the event image if present, otherwise null\n- venue: \"Turbohaus\"\n\nToday's date is: {{ $now.format('yyyy-MM-dd') }}\nOnly include events from today up to 14 days from now ({{ $now.plus({days: 14}).format('yyyy-MM-dd') }}).\n\nReturn ONLY a valid JSON array. If no events found, return an empty array [].\nDo not include any explanation, just the JSON array.\n\nHTML Content:\n{{ $json.data }}"
+              "content": "=You are an expert at extracting music event information from HTML. Analyze the following HTML from multiple venues in Montreal and extract ONLY music events (concerts, live music, DJ sets, etc.).\\n\\nIGNORE: comedy shows, talks, workshops, poetry, theatre, and any non-music events.\\n\\nFor each music event found, extract:\\n- eventName: The name of the event or performing artist(s)\\n- eventDate: The date in ISO-8601 format (YYYY-MM-DD). If a date range, use the start date.\\n- eventImage: The full URL of the event image if present, otherwise null\\n- venue: should come from the data \\nOnly include events from today up to 14 days from now .\\n\\nReturn ONLY a valid JSON array. If no events found, return an empty array [].\\nDo not include any explanation, just the JSON array.\\n\\nHTML Content:\\n{{ $json.data }}\n"
             }
           ]
         },
-        "options": {
-          "temperature": 0.1
-        }
+        "simplify": false,
+        "options": {}
       },
-      "id": "ai-turbohaus",
-      "name": "AI Parse Turbohaus",
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
-      "position": [500, 0],
+      "position": [
+        6384,
+        3504
+      ],
+      "id": "2bd1e43a-1ee7-4d36-847d-fcb0350ae3d1",
+      "name": "Message a model",
       "credentials": {
         "googlePalmApi": {
-          "id": "GOOGLE_GEMINI_CREDENTIAL_ID",
-          "name": "Google Gemini API"
+          "id": "oSz1l2qZdmPu4meC",
+          "name": "Google Gemini(PaLM) Api account"
         }
       }
-    },
-    {
-      "parameters": {
-        "modelName": "models/gemini-1.5-flash",
-        "messages": {
-          "values": [
-            {
-              "content": "=You are an expert at extracting music event information from HTML. Analyze the following HTML from Bar Le Ritz PDB venue in Montreal and extract ONLY music events (concerts, live music, DJ sets, etc.).\n\nIGNORE: comedy shows, talks, workshops, poetry, theatre, and any non-music events.\n\nFor each music event found, extract:\n- eventName: The name of the event or performing artist(s)\n- eventDate: The date in ISO-8601 format (YYYY-MM-DD). If a date range, use the start date.\n- eventImage: The full URL of the event image if present, otherwise null\n- venue: \"Bar Le Ritz PDB\"\n\nToday's date is: {{ $now.format('yyyy-MM-dd') }}\nOnly include events from today up to 14 days from now ({{ $now.plus({days: 14}).format('yyyy-MM-dd') }}).\n\nReturn ONLY a valid JSON array. If no events found, return an empty array [].\nDo not include any explanation, just the JSON array.\n\nHTML Content:\n{{ $json.data }}"
-            }
-          ]
-        },
-        "options": {
-          "temperature": 0.1
-        }
-      },
-      "id": "ai-barleritz",
-      "name": "AI Parse Bar Le Ritz",
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [500, 150],
-      "credentials": {
-        "googlePalmApi": {
-          "id": "GOOGLE_GEMINI_CREDENTIAL_ID",
-          "name": "Google Gemini API"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "modelName": "models/gemini-1.5-flash",
-        "messages": {
-          "values": [
-            {
-              "content": "=You are an expert at extracting music event information from HTML. Analyze the following HTML from Quai des Brumes venue in Montreal and extract ONLY music events (concerts, live music, DJ sets, etc.).\n\nIGNORE: comedy shows, talks, workshops, poetry, theatre, and any non-music events.\n\nFor each music event found, extract:\n- eventName: The name of the event or performing artist(s)\n- eventDate: The date in ISO-8601 format (YYYY-MM-DD). If a date range, use the start date.\n- eventImage: The full URL of the event image if present, otherwise null\n- venue: \"Quai des Brumes\"\n\nToday's date is: {{ $now.format('yyyy-MM-dd') }}\nOnly include events from today up to 14 days from now ({{ $now.plus({days: 14}).format('yyyy-MM-dd') }}).\n\nReturn ONLY a valid JSON array. If no events found, return an empty array [].\nDo not include any explanation, just the JSON array.\n\nHTML Content:\n{{ $json.data }}"
-            }
-          ]
-        },
-        "options": {
-          "temperature": 0.1
-        }
-      },
-      "id": "ai-quaidesbrumes",
-      "name": "AI Parse Quai des Brumes",
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [500, 300],
-      "credentials": {
-        "googlePalmApi": {
-          "id": "GOOGLE_GEMINI_CREDENTIAL_ID",
-          "name": "Google Gemini API"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "modelName": "models/gemini-1.5-flash",
-        "messages": {
-          "values": [
-            {
-              "content": "=You are an expert at extracting music event information from HTML. Analyze the following HTML from Foufounes Electriques venue in Montreal and extract ONLY music events (concerts, live music, DJ sets, punk shows, metal shows, etc.).\n\nIGNORE: comedy shows, talks, workshops, poetry, theatre, and any non-music events.\n\nFor each music event found, extract:\n- eventName: The name of the event or performing artist(s)\n- eventDate: The date in ISO-8601 format (YYYY-MM-DD). If a date range, use the start date.\n- eventImage: The full URL of the event image if present, otherwise null\n- venue: \"Foufounes Electriques\"\n\nToday's date is: {{ $now.format('yyyy-MM-dd') }}\nOnly include events from today up to 14 days from now ({{ $now.plus({days: 14}).format('yyyy-MM-dd') }}).\n\nReturn ONLY a valid JSON array. If no events found, return an empty array [].\nDo not include any explanation, just the JSON array.\n\nHTML Content:\n{{ $json.data }}"
-            }
-          ]
-        },
-        "options": {
-          "temperature": 0.1
-        }
-      },
-      "id": "ai-foufounes",
-      "name": "AI Parse Foufounes",
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [500, 450],
-      "credentials": {
-        "googlePalmApi": {
-          "id": "GOOGLE_GEMINI_CREDENTIAL_ID",
-          "name": "Google Gemini API"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "modelName": "models/gemini-1.5-flash",
-        "messages": {
-          "values": [
-            {
-              "content": "=You are an expert at extracting music event information from HTML. Analyze the following HTML from Casa del Popolo venue in Montreal and extract ONLY music events (concerts, live music, DJ sets, etc.).\n\nIGNORE: comedy shows, talks, workshops, poetry, theatre, and any non-music events.\n\nFor each music event found, extract:\n- eventName: The name of the event or performing artist(s)\n- eventDate: The date in ISO-8601 format (YYYY-MM-DD). If a date range, use the start date.\n- eventImage: The full URL of the event image if present, otherwise null\n- venue: \"Casa del Popolo\"\n\nToday's date is: {{ $now.format('yyyy-MM-dd') }}\nOnly include events from today up to 14 days from now ({{ $now.plus({days: 14}).format('yyyy-MM-dd') }}).\n\nReturn ONLY a valid JSON array. If no events found, return an empty array [].\nDo not include any explanation, just the JSON array.\n\nHTML Content:\n{{ $json.data }}"
-            }
-          ]
-        },
-        "options": {
-          "temperature": 0.1
-        }
-      },
-      "id": "ai-casadelpopolo",
-      "name": "AI Parse Casa del Popolo",
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [500, 600],
-      "credentials": {
-        "googlePalmApi": {
-          "id": "GOOGLE_GEMINI_CREDENTIAL_ID",
-          "name": "Google Gemini API"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "mode": "raw",
-        "jsonOutput": "={{ JSON.parse($json.message.content) }}",
-        "options": {}
-      },
-      "id": "parse-turbohaus",
-      "name": "Parse Turbohaus JSON",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [750, 0]
-    },
-    {
-      "parameters": {
-        "mode": "raw",
-        "jsonOutput": "={{ JSON.parse($json.message.content) }}",
-        "options": {}
-      },
-      "id": "parse-barleritz",
-      "name": "Parse Bar Le Ritz JSON",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [750, 150]
-    },
-    {
-      "parameters": {
-        "mode": "raw",
-        "jsonOutput": "={{ JSON.parse($json.message.content) }}",
-        "options": {}
-      },
-      "id": "parse-quaidesbrumes",
-      "name": "Parse Quai des Brumes JSON",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [750, 300]
-    },
-    {
-      "parameters": {
-        "mode": "raw",
-        "jsonOutput": "={{ JSON.parse($json.message.content) }}",
-        "options": {}
-      },
-      "id": "parse-foufounes",
-      "name": "Parse Foufounes JSON",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [750, 450]
-    },
-    {
-      "parameters": {
-        "mode": "raw",
-        "jsonOutput": "={{ JSON.parse($json.message.content) }}",
-        "options": {}
-      },
-      "id": "parse-casadelpopolo",
-      "name": "Parse Casa del Popolo JSON",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [750, 600]
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "combinationMode": "multiplex",
-        "options": {}
-      },
-      "id": "merge-all",
-      "name": "Merge All Events",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3,
-      "position": [1000, 300]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Flatten all arrays and normalize the data\nconst allEvents = [];\n\nfor (const item of $input.all()) {\n  const data = item.json;\n  \n  // Handle if data is an array directly or nested\n  const events = Array.isArray(data) ? data : (data.events || [data]);\n  \n  for (const event of events) {\n    if (event && event.eventName && event.eventDate) {\n      allEvents.push({\n        eventName: event.eventName || null,\n        eventDate: event.eventDate || null,\n        eventImage: event.eventImage || null,\n        venue: event.venue || null\n      });\n    }\n  }\n}\n\n// Remove duplicates based on eventName + eventDate + venue\nconst seen = new Set();\nconst uniqueEvents = allEvents.filter(event => {\n  const key = `${event.eventName}|${event.eventDate}|${event.venue}`;\n  if (seen.has(key)) {\n    return false;\n  }\n  seen.add(key);\n  return true;\n});\n\n// Sort by eventDate ascending\nuniqueEvents.sort((a, b) => {\n  const dateA = new Date(a.eventDate);\n  const dateB = new Date(b.eventDate);\n  return dateA - dateB;\n});\n\n// Return as single item with the array\nreturn [{ json: { events: uniqueEvents } }];"
-      },
-      "id": "code-dedupe-sort",
-      "name": "Deduplicate & Sort",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [1250, 300]
-    },
-    {
-      "parameters": {
-        "mode": "raw",
-        "jsonOutput": "={{ $json.events }}",
-        "options": {}
-      },
-      "id": "final-output",
-      "name": "Final Output",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [1500, 300]
     }
   ],
+  "pinData": {},
   "connections": {
-    "Daily Midnight Trigger": {
+    "Daily Midnight Trigger1": {
       "main": [
         [
-          { "node": "Fetch Turbohaus", "type": "main", "index": 0 },
-          { "node": "Fetch Bar Le Ritz", "type": "main", "index": 0 },
-          { "node": "Fetch Quai des Brumes", "type": "main", "index": 0 },
-          { "node": "Fetch Foufounes", "type": "main", "index": 0 },
-          { "node": "Fetch Casa del Popolo", "type": "main", "index": 0 }
+          {
+            "node": "Fetch Bar Le Ritz1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fetch Quai des Brumes1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fetch Foufounes1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fetch Casa del Popolo1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fetch Turbohaus1",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
-    "Fetch Turbohaus": {
+    "Fetch Turbohaus1": {
       "main": [
-        [{ "node": "AI Parse Turbohaus", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "Fetch Bar Le Ritz": {
+    "Fetch Bar Le Ritz1": {
       "main": [
-        [{ "node": "AI Parse Bar Le Ritz", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "Fetch Quai des Brumes": {
+    "Fetch Quai des Brumes1": {
       "main": [
-        [{ "node": "AI Parse Quai des Brumes", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "Fetch Foufounes": {
+    "Fetch Foufounes1": {
       "main": [
-        [{ "node": "AI Parse Foufounes", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "Fetch Casa del Popolo": {
+    "Fetch Casa del Popolo1": {
       "main": [
-        [{ "node": "AI Parse Casa del Popolo", "type": "main", "index": 0 }]
-      ]
-    },
-    "AI Parse Turbohaus": {
-      "main": [
-        [{ "node": "Parse Turbohaus JSON", "type": "main", "index": 0 }]
-      ]
-    },
-    "AI Parse Bar Le Ritz": {
-      "main": [
-        [{ "node": "Parse Bar Le Ritz JSON", "type": "main", "index": 0 }]
-      ]
-    },
-    "AI Parse Quai des Brumes": {
-      "main": [
-        [{ "node": "Parse Quai des Brumes JSON", "type": "main", "index": 0 }]
-      ]
-    },
-    "AI Parse Foufounes": {
-      "main": [
-        [{ "node": "Parse Foufounes JSON", "type": "main", "index": 0 }]
-      ]
-    },
-    "AI Parse Casa del Popolo": {
-      "main": [
-        [{ "node": "Parse Casa del Popolo JSON", "type": "main", "index": 0 }]
-      ]
-    },
-    "Parse Turbohaus JSON": {
-      "main": [
-        [{ "node": "Merge All Events", "type": "main", "index": 0 }]
-      ]
-    },
-    "Parse Bar Le Ritz JSON": {
-      "main": [
-        [{ "node": "Merge All Events", "type": "main", "index": 0 }]
-      ]
-    },
-    "Parse Quai des Brumes JSON": {
-      "main": [
-        [{ "node": "Merge All Events", "type": "main", "index": 0 }]
-      ]
-    },
-    "Parse Foufounes JSON": {
-      "main": [
-        [{ "node": "Merge All Events", "type": "main", "index": 0 }]
-      ]
-    },
-    "Parse Casa del Popolo JSON": {
-      "main": [
-        [{ "node": "Merge All Events", "type": "main", "index": 0 }]
-      ]
-    },
-    "Merge All Events": {
-      "main": [
-        [{ "node": "Deduplicate & Sort", "type": "main", "index": 0 }]
-      ]
-    },
-    "Deduplicate & Sort": {
-      "main": [
-        [{ "node": "Final Output", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
+  "active": false,
   "settings": {
-    "executionOrder": "v1",
-    "timezone": "America/Toronto"
+    "executionOrder": "v1"
   },
-  "staticData": null,
-  "tags": [],
-  "triggerCount": 1,
-  "pinData": {}
+  "versionId": "REMOVED",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "REMOVED"
+  },
+  "id": "REMOVED",
+  "tags": []
 }
